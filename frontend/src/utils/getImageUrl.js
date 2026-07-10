@@ -1,4 +1,6 @@
-const API_ORIGIN = "http://localhost:5000";
+const API_ORIGIN =
+  import.meta.env.VITE_API_URL?.replace("/api", "") ||
+  "https://a-to-z-grocery-app.onrender.com";
 
 export const getImageUrl = (image) => {
   if (!image) return "/placeholder.png";

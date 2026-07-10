@@ -2,18 +2,11 @@ import { Link } from "react-router-dom";
 import { Heart, Star, Clock } from "lucide-react";
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
-
-const BASE_URL = "http://localhost:5000";
+import { getImageUrl } from "../utils/getImageUrl";
 
 export default function ProductCard({ product }) {
   const { addToCart } = useCart();
   const { handleToggleWishlist, isInWishlist } = useWishlist();
-
-  const getProductImage = (image) => {
-    if (!image) return "/placeholder.png";
-    if (image.startsWith("http")) return image;
-    return `${BASE_URL}${image}`;
-  };
 
   const price = Number(product.price) || 0;
   const discountPrice = Number(product.discountPrice) || 0;
@@ -44,7 +37,7 @@ export default function ProductCard({ product }) {
           </button>
 
           <img
-            src={getProductImage(product.image)}
+            src={getImageUrl(product.image)}
             alt={product.name}
             className="h-full w-full object-contain p-3"
             onError={(e) => {
