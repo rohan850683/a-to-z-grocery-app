@@ -1,0 +1,30 @@
+// export const CATEGORIES = [
+//   { key: 'veg', label: 'Veg', emoji: '🥦' },
+//   { key: 'non-veg', label: 'Non-Veg', emoji: '🍗' },
+//   { key: 'cake', label: 'Cake', emoji: '🎂' },
+//   { key: 'cold-drinks', label: 'Cold Drinks', emoji: '🥤' },
+//   { key: 'chocolate', label: 'Chocolate', emoji: '🍫' },
+//   { key: 'ice-cream', label: 'Ice Cream', emoji: '🍨' },
+//   { key: 'groceries', label: 'Groceries', emoji: '🛒' },
+//   { key: 'pet-food', label: 'Pet Food', emoji: '🐾' },
+// ];
+
+export const CATEGORIES = [
+  { key: 'fruits', label: 'Fruits', emoji: '🍎' },
+  { key: 'vegetables', label: 'Vegetables', emoji: '🥦' },
+  { key: 'dairy', label: 'Dairy', emoji: '🥛' },
+  { key: 'bakery', label: 'Bakery', emoji: '🍞' },
+  { key: 'beverages', label: 'Beverages', emoji: '🥤' },
+  { key: 'snacks', label: 'Snacks', emoji: '🍫' },
+  { key: 'grocery', label: 'Grocery', emoji: '🍚' },
+  { key: 'meat-fish', label: 'Meat & Fish', emoji: '🍗' },
+  { key: 'frozen-food', label: 'Frozen Food', emoji: '🍦' },
+  { key: 'toys', label: 'Toys', emoji: '🧸' },
+  { key: 'pet-care', label: 'Pet Care', emoji: '🐶' },
+  { key: 'personal-care', label: 'Personal Care', emoji: '💄' },
+  { key: 'home-care', label: 'Home Care', emoji: '🧹' },
+  { key: 'health', label: 'Health', emoji: '💊' },
+  { key: 'flowers', label: 'Flowers', emoji: '🌼' },
+  { key: 'electronics', label: 'Electronics', emoji: '⚡' },
+  { key: 'mobile-accessories', label: 'Mobile Accessories', emoji: '📱' },
+];

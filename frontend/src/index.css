@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-cream text-ink font-body antialiased;
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: 'Fredoka', sans-serif;
+}
+
+::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: #cdead9;
+  border-radius: 999px;
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+.btn-primary {
+  @apply bg-mango-400 hover:bg-mango-500 text-ink font-semibold rounded-full px-6 py-3 transition-all duration-200 shadow-card hover:shadow-cardHover active:scale-95;
+}
+
+.btn-outline {
+  @apply border-2 border-forest-500 text-forest-500 hover:bg-forest-500 hover:text-white font-semibold rounded-full px-6 py-3 transition-all duration-200 active:scale-95;
+}
+
+.card {
+  @apply bg-white rounded-2xl shadow-card hover:shadow-cardHover transition-all duration-300;
+}
+
+.container-app {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
