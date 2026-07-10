@@ -4,8 +4,8 @@ import { Heart, ShoppingCart, Zap, Truck, ShieldCheck, Clock } from "lucide-reac
 import api from "../services/api";
 import { useCart } from "../context/CartContext";
 import SimilarProducts from "../components/SimilarProducts";
+import { getImageUrl } from "../utils/getImageUrl";
 
-const BASE_URL = "http://localhost:5000";
 
 export default function ProductDetail() {
   const { id } = useParams();
@@ -16,11 +16,7 @@ export default function ProductDetail() {
   const [loading, setLoading] = useState(true);
   const [qty, setQty] = useState(1);
 
-  const getProductImage = (image) => {
-    if (!image) return "/placeholder.png";
-    if (image.startsWith("http")) return image;
-    return `${BASE_URL}${image}`;
-  };
+  
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -85,7 +81,7 @@ export default function ProductDetail() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="border rounded-2xl p-4 flex items-center justify-center bg-white">
             <img
-              src={getProductImage(product.image)}
+              src={getImageUrl(product.image)}
               alt={product.name}
               className="w-full max-h-[430px] object-contain hover:scale-105 transition duration-300"
             />
