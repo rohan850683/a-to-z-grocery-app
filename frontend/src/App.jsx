@@ -31,6 +31,8 @@ import AdminAnalytics from "./pages/AdminAnalytics.jsx";
 import AdminRevenue from "./pages/AdminRevenue.jsx";
 import AdminStock from "./pages/AdminStock.jsx";
 import AdminSettings from "./pages/AdminSettings.jsx";
+import ForgotPassword from "./pages/ForgotPassword.jsx";
+import ResetPassword from "./pages/ResetPassword.jsx";
 
 function App() {
   return (
@@ -57,6 +59,15 @@ function App() {
           <Route path="/offers" element={<Offers />} />
 
           <Route path="/login" element={<Login />} />
+          <Route
+  path="/forgot-password"
+  element={<ForgotPassword />}
+/>
+
+<Route
+  path="/reset-password/:token"
+  element={<ResetPassword />}
+/>
 
           <Route path="/signup" element={<Signup />} />
 
