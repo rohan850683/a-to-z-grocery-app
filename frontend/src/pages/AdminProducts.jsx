@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { getImageUrl } from "../utils/getImageUrl";
 import {
   getAllProducts,
   createProduct,
@@ -6,7 +7,6 @@ import {
   deleteProduct,
 } from "../services/productService";
 
-const BASE_URL = "http://localhost:5000";
 
 const categories = [
   { value: "fruits", label: "🍎 Fruits" },
@@ -47,11 +47,7 @@ export default function AdminProducts() {
     description: "",
   });
 
-  const getImageUrl = (image) => {
-    if (!image) return "https://via.placeholder.com/300x200?text=No+Image";
-    if (image.startsWith("http")) return image;
-    return `${BASE_URL}${image}`;
-  };
+
 
   const fetchProducts = async () => {
     try {
@@ -298,9 +294,8 @@ export default function AdminProducts() {
               alt={product.name}
               className="h-40 w-full object-cover rounded-lg mb-4 bg-gray-100"
               onError={(e) => {
-                e.currentTarget.src =
-                  "https://via.placeholder.com/300x200?text=No+Image";
-              }}
+  e.currentTarget.src = "/placeholder.png";
+}}
             />
 
             <h3 className="text-xl font-bold">{product.name}</h3>
