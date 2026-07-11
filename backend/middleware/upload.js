@@ -1,43 +1,37 @@
 const multer = require("multer");
 const path = require("path");
-const fs = require("fs");
 
-const uploadDir = path.join(__dirname, "../uploads/products");
-
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true });
-}
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, uploadDir);
-  },
-
-  filename: function (req, file, cb) {
-    const uniqueName = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(null, uniqueName + path.extname(file.originalname));
-  },
-});
+// Cloudinary upload ke liye file RAM me temporarily store hogi
+const storage = multer.memoryStorage();
 
 const fileFilter = (req, file, cb) => {
-  const allowedTypes = /jpg|jpeg|png|webp/;
+  const allowedExtensions = /jpg|jpeg|png|webp/;
+  const allowedMimeTypes = [
+    "image/jpeg",
+    "image/jpg",
+    "image/png",
+    "image/webp",
+  ];
 
-  const extname = allowedTypes.test(
+  const extensionValid = allowedExtensions.test(
     path.extname(file.originalname).toLowerCase()
   );
 
-  const mimetype = allowedTypes.test(file.mimetype);
+  const mimeTypeValid = allowedMimeTypes.includes(file.mimetype);
 
-  if (extname && mimetype) {
+  if (extensionValid && mimeTypeValid) {
     return cb(null, true);
   }
 
-  cb(new Error("Only Images are Allowed!"));
+  return cb(new Error("Only JPG, JPEG, PNG and WEBP images are allowed!"));
 };
 
 const upload = multer({
   storage,
   fileFilter,
+  limits: {
+    fileSize: 5 * 1024 * 1024, // Maximum 5 MB
+  },
 });
 
 module.exports = upload;
