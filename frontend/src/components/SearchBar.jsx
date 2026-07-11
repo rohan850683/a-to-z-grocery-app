@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
+import { getImageUrl } from "../utils/getImageUrl";
 
 const RECENT_KEY = "az_recent_searches";
 
@@ -85,11 +86,15 @@ export default function SearchBar({ mobile = false, onSearchDone }) {
     };
 
     document.addEventListener("mousedown", closeDropdown);
-    return () => document.removeEventListener("mousedown", closeDropdown);
+
+    return () => {
+      document.removeEventListener("mousedown", closeDropdown);
+    };
   }, []);
 
   const saveRecentSearch = (text) => {
     const clean = cleanSearchText(text);
+
     if (!clean) return;
 
     const updated = [
@@ -119,6 +124,7 @@ export default function SearchBar({ mobile = false, onSearchDone }) {
 
   const submitSearch = (text = query) => {
     const clean = cleanSearchText(text);
+
     if (!clean) return;
 
     saveRecentSearch(clean);
@@ -127,7 +133,9 @@ export default function SearchBar({ mobile = false, onSearchDone }) {
 
     navigate(`/category/grocery?search=${encodeURIComponent(clean)}`);
 
-    if (onSearchDone) onSearchDone();
+    if (onSearchDone) {
+      onSearchDone();
+    }
   };
 
   const startVoiceSearch = () => {
@@ -242,7 +250,9 @@ export default function SearchBar({ mobile = false, onSearchDone }) {
       {listening && (
         <div className="absolute left-0 right-0 mt-2 bg-white rounded-2xl shadow-xl border border-forest-100 p-4 z-50 text-center">
           <p className="text-3xl mb-2">🎙️</p>
+
           <p className="font-bold text-forest-600">Listening...</p>
+
           <p className="text-xs text-ink/50 mt-1">
             Say product name like milk, rice, apple or chips
           </p>
@@ -258,75 +268,80 @@ export default function SearchBar({ mobile = false, onSearchDone }) {
             </div>
           )}
 
-          {query.trim() && !loadingSuggestions && suggestions.length > 0 && (
-            <div className="p-2">
-              <p className="px-3 py-2 text-xs font-bold text-ink/40 uppercase">
-                Suggestions
-              </p>
-
-              {suggestions.map((product, index) => (
-                <button
-                  key={product._id}
-                  type="button"
-                  onClick={() => submitSearch(product.name)}
-                  className="w-full flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-mint text-left"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-mint flex items-center justify-center overflow-hidden shrink-0">
-                    {product.image ? (
-                      <img
-                        src={
-                          product.image.startsWith("http")
-                            ? product.image
-                            : `http://localhost:5000${product.image}`
-                        }
-                        alt={product.name}
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <Search size={16} className="text-forest-500" />
-                    )}
-                  </div>
-
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-semibold text-ink truncate">
-                      {product.name}
-                    </p>
-
-                    <p className="text-xs text-ink/50 truncate">
-                      {product.category} • ₹
-                      {product.discountPrice || product.price}
-                    </p>
-                  </div>
-
-                  {index === 0 && (
-                    <span className="text-[10px] font-bold bg-forest-50 text-forest-600 px-2 py-1 rounded-full">
-                      Top
-                    </span>
-                  )}
-                </button>
-              ))}
-            </div>
-          )}
-
-          {query.trim() && !loadingSuggestions && suggestions.length === 0 && (
-            <div className="p-4">
-              <div className="text-center py-3">
-                <p className="text-3xl mb-2">😕</p>
-                <p className="font-bold text-ink">No quick suggestions</p>
-                <p className="text-xs text-ink/50 mt-1">
-                  Press Enter to search for “{cleanSearchText(query)}”
+          {query.trim() &&
+            !loadingSuggestions &&
+            suggestions.length > 0 && (
+              <div className="p-2">
+                <p className="px-3 py-2 text-xs font-bold text-ink/40 uppercase">
+                  Suggestions
                 </p>
-              </div>
 
-              <button
-                type="button"
-                onClick={() => submitSearch(query)}
-                className="w-full mt-3 bg-forest-500 text-white rounded-full py-2.5 text-sm font-bold hover:bg-forest-600"
-              >
-                Search “{cleanSearchText(query)}”
-              </button>
-            </div>
-          )}
+                {suggestions.map((product, index) => (
+                  <button
+                    key={product._id}
+                    type="button"
+                    onClick={() => submitSearch(product.name)}
+                    className="w-full flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-mint text-left"
+                  >
+                    <div className="w-10 h-10 rounded-xl bg-mint flex items-center justify-center overflow-hidden shrink-0">
+                      {product.image ? (
+                        <img
+                          src={getImageUrl(product.image)}
+                          alt={product.name}
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            e.currentTarget.src = "/placeholder.png";
+                          }}
+                        />
+                      ) : (
+                        <Search size={16} className="text-forest-500" />
+                      )}
+                    </div>
+
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-semibold text-ink truncate">
+                        {product.name}
+                      </p>
+
+                      <p className="text-xs text-ink/50 truncate">
+                        {product.category} • ₹
+                        {product.discountPrice || product.price}
+                      </p>
+                    </div>
+
+                    {index === 0 && (
+                      <span className="text-[10px] font-bold bg-forest-50 text-forest-600 px-2 py-1 rounded-full">
+                        Top
+                      </span>
+                    )}
+                  </button>
+                ))}
+              </div>
+            )}
+
+          {query.trim() &&
+            !loadingSuggestions &&
+            suggestions.length === 0 && (
+              <div className="p-4">
+                <div className="text-center py-3">
+                  <p className="text-3xl mb-2">😕</p>
+
+                  <p className="font-bold text-ink">No quick suggestions</p>
+
+                  <p className="text-xs text-ink/50 mt-1">
+                    Press Enter to search for “{cleanSearchText(query)}”
+                  </p>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => submitSearch(query)}
+                  className="w-full mt-3 bg-forest-500 text-white rounded-full py-2.5 text-sm font-bold hover:bg-forest-600"
+                >
+                  Search “{cleanSearchText(query)}”
+                </button>
+              </div>
+            )}
 
           {!query.trim() && recentSearches.length > 0 && (
             <div className="p-2 border-b border-forest-50">
@@ -355,6 +370,7 @@ export default function SearchBar({ mobile = false, onSearchDone }) {
                     className="flex items-center gap-3 flex-1 text-left"
                   >
                     <Clock size={16} className="text-ink/40" />
+
                     <span className="text-sm font-medium">{item}</span>
                   </button>
 
@@ -385,6 +401,7 @@ export default function SearchBar({ mobile = false, onSearchDone }) {
                   className="w-full flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-mint text-left"
                 >
                   <TrendingUp size={16} className="text-chili-500" />
+
                   <span className="text-sm font-medium">{item}</span>
                 </button>
               ))}
