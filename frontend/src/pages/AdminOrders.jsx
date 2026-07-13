@@ -87,8 +87,8 @@ export default function AdminOrders() {
   }, []);
 
   return (
-    <div className="container-app py-8">
-      <div className="flex items-center justify-between gap-4 mb-6">
+    <div className="container-app py-4 md:py-8 px-2 sm:px-4">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div>
           <Link
             to="/admin"
@@ -98,7 +98,7 @@ export default function AdminOrders() {
             Back to Admin
           </Link>
 
-          <h1 className="font-display text-3xl font-bold text-ink flex items-center gap-2">
+          <h1 className="font-display text-2xl md:text-3xl font-bold text-ink flex items-center gap-2">
             <Package className="text-forest-500" />
             Admin Orders
           </h1>
@@ -108,7 +108,7 @@ export default function AdminOrders() {
           </p>
         </div>
 
-        <button onClick={fetchOrders} className="btn-outline flex items-center gap-2">
+        <button onClick={fetchOrders} className="btn-outline w-full sm:w-auto flex items-center justify-center gap-2">
           <RefreshCw size={16} />
           Refresh
         </button>
@@ -146,7 +146,7 @@ function OrderCard({ order, updatingId, updateStatus }) {
     activeIndex <= 0 ? 15 : (activeIndex / (trackingSteps.length - 1)) * 100;
 
   return (
-    <div className="card p-5">
+    <div className="card p-4 md:p-5">
       <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
         <div>
           <p className="font-display font-bold text-lg text-ink">
@@ -177,7 +177,7 @@ function OrderCard({ order, updatingId, updateStatus }) {
             value={order.status}
             disabled={updatingId === order._id}
             onChange={(e) => updateStatus(order._id, e.target.value)}
-            className="rounded-xl border border-forest-100 bg-mint/50 px-4 py-2 text-sm font-semibold capitalize focus:outline-none focus:ring-2 focus:ring-forest-300"
+            className="w-full sm:w-auto rounded-xl border border-forest-100 bg-mint/50 px-4 py-2 text-sm font-semibold capitalize focus:outline-none focus:ring-2 focus:ring-forest-300"
           >
             {statusOptions.map((status) => (
               <option key={status} value={status}>
@@ -200,7 +200,7 @@ function OrderCard({ order, updatingId, updateStatus }) {
           />
         </div>
 
-        <div className="grid grid-cols-4 gap-2 mt-4">
+        <div className="grid grid-cols-4 gap-1 md:gap-2 mt-4">
           {trackingSteps.map((step, index) => {
             const Icon = step.icon;
             const isDone = index <= activeIndex;
@@ -208,7 +208,7 @@ function OrderCard({ order, updatingId, updateStatus }) {
             return (
               <div key={step.key} className="text-center">
                 <div
-                  className={`mx-auto w-10 h-10 rounded-full flex items-center justify-center ${
+                  className={`mx-auto w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center ${
                     isDone ? "bg-forest-500 text-white" : "bg-mint text-ink/40"
                   }`}
                 >
@@ -283,7 +283,7 @@ function OrderCard({ order, updatingId, updateStatus }) {
 
           <div className="space-y-2">
             {order.items?.map((item, index) => (
-              <div key={index} className="flex justify-between gap-3 text-sm">
+              <div key={index} className="flex justify-between gap-3 text-sm flex-wrap">
                 <span className="text-ink/70">
                   {item.name} x{item.quantity}
                 </span>

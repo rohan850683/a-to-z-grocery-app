@@ -25,7 +25,7 @@ export default function CartPage() {
 
   if (cartItems.length === 0) {
     return (
-      <div className="container-app py-24 text-center">
+      <div className="container-app py-12 md:py-24 px-4 text-center">
         <ShoppingBag className="mx-auto text-forest-300" size={64} />
         <h1 className="font-display text-2xl font-bold text-ink mt-4">
           Your cart is empty
@@ -44,9 +44,9 @@ export default function CartPage() {
   const grandTotal = totalPrice + deliveryFee;
 
   return (
-    <div className="container-app py-8">
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="font-display text-3xl font-bold text-ink">
+    <div className="container-app py-4 md:py-8 px-2 sm:px-4">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
+        <h1 className="font-display text-2xl md:text-3xl font-bold text-ink">
           Your Cart{" "}
           <span className="text-ink/40 text-lg font-body">
             ({totalItems} items)
@@ -70,11 +70,11 @@ export default function CartPage() {
             return (
               <div
                 key={item._id}
-                className="card p-4 flex gap-4 items-center"
+                className="card p-3 md:p-4 flex flex-col sm:flex-row gap-4 sm:items-center"
               >
                 <Link
                   to={`/product/${item._id}`}
-                  className="w-20 h-20 rounded-xl overflow-hidden bg-mint shrink-0"
+                  className="w-24 h-24 sm:w-20 sm:h-20 rounded-xl overflow-hidden bg-mint shrink-0 mx-auto sm:mx-0"
                 >
                   <img
                     src={getProductImage(item.image)}
@@ -86,7 +86,7 @@ export default function CartPage() {
                   />
                 </Link>
 
-                <div className="flex-1 min-w-0">
+                <div className="flex-1 min-w-0 text-center sm:text-left">
                   <Link
                     to={`/product/${item._id}`}
                     className="font-semibold text-sm text-ink hover:text-forest-600 line-clamp-1"
@@ -109,7 +109,7 @@ export default function CartPage() {
                   </p>
                 </div>
 
-                <div className="flex items-center gap-3 bg-mint rounded-full px-2 py-1">
+                <div className="flex items-center justify-center gap-3 bg-mint rounded-full px-2 py-1 mx-auto sm:mx-0">
                   <button
                     onClick={() => decreaseQty(item._id)}
                     className="w-7 h-7 rounded-full bg-white flex items-center justify-center shadow-sm"
@@ -131,7 +131,7 @@ export default function CartPage() {
 
                 <button
                   onClick={() => removeFromCart(item._id)}
-                  className="text-chili-500 hover:text-chili-600 p-2"
+                  className="text-chili-500 hover:text-chili-600 p-2 self-center sm:self-auto"
                   aria-label="Remove item"
                 >
                   <Trash2 size={18} />
@@ -141,7 +141,7 @@ export default function CartPage() {
           })}
         </div>
 
-        <div className="card p-6 h-fit sticky top-24">
+        <div className="card p-4 md:p-6 h-fit lg:sticky lg:top-24">
           <h2 className="font-display text-lg font-bold text-ink mb-4">
             Order Summary
           </h2>
@@ -165,7 +165,7 @@ export default function CartPage() {
 
           <button
             onClick={() => navigate("/checkout")}
-            className="btn-primary w-full mt-6"
+            className="btn-primary w-full mt-5 py-3 text-sm md:text-base"
           >
             Proceed to Checkout
           </button>

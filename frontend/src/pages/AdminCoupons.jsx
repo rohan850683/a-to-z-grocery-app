@@ -345,52 +345,64 @@ const AdminCoupons = () => {
     });
   }, [coupons, searchTerm]);
 
+
   const getCouponStatus = (coupon) => {
-    const now = new Date();
-    const startDate = coupon.startDate
-      ? new Date(coupon.startDate)
-      : null;
-    const expiryDate = coupon.expiryDate
-      ? new Date(coupon.expiryDate)
-      : null;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
 
-    if (!coupon.isActive) {
-      return {
-        label: "Inactive",
-        classes: "bg-gray-100 text-gray-700",
-      };
-    }
+  const startDate = coupon.startDate
+    ? new Date(coupon.startDate)
+    : null;
 
-    if (startDate && now < startDate) {
-      return {
-        label: "Upcoming",
-        classes: "bg-blue-100 text-blue-700",
-      };
-    }
+  const expiryDate = coupon.expiryDate
+    ? new Date(coupon.expiryDate)
+    : null;
 
-    if (expiryDate && now > expiryDate) {
-      return {
-        label: "Expired",
-        classes: "bg-red-100 text-red-700",
-      };
-    }
+  if (startDate) {
+    startDate.setHours(0, 0, 0, 0);
+  }
 
-    if (
-      coupon.usageLimit !== null &&
-      coupon.usageLimit !== undefined &&
-      coupon.usedCount >= coupon.usageLimit
-    ) {
-      return {
-        label: "Limit reached",
-        classes: "bg-orange-100 text-orange-700",
-      };
-    }
+  if (expiryDate) {
+    expiryDate.setHours(23, 59, 59, 999);
+  }
 
+  if (!coupon.isActive) {
     return {
-      label: "Active",
-      classes: "bg-green-100 text-green-700",
+      label: "Inactive",
+      classes: "bg-gray-100 text-gray-700",
     };
+  }
+
+  if (startDate && today < startDate) {
+    return {
+      label: "Upcoming",
+      classes: "bg-blue-100 text-blue-700",
+    };
+  }
+
+  if (expiryDate && today > expiryDate) {
+    return {
+      label: "Expired",
+      classes: "bg-red-100 text-red-700",
+    };
+  }
+
+  if (
+    coupon.usageLimit !== null &&
+    coupon.usageLimit !== undefined &&
+    Number(coupon.usedCount || 0) >= Number(coupon.usageLimit)
+  ) {
+    return {
+      label: "Limit Reached",
+      classes: "bg-orange-100 text-orange-700",
+    };
+  }
+
+  return {
+    label: "Active",
+    classes: "bg-green-100 text-green-700",
   };
+};
 
   const activeCouponsCount = coupons.filter(
     (coupon) => getCouponStatus(coupon).label === "Active"

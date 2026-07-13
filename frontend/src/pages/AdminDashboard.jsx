@@ -140,9 +140,9 @@ export default function AdminDashboard() {
 
   return (
     <AdminLayout>
-      <div className="p-2 md:p-4">
+      <div className="p-3 sm:p-4 md:p-6">
         <div className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold">
+          <h1 className="text-2xl md:text-4xl font-bold">
             🛠️ Admin Dashboard
           </h1>
           <p className="text-gray-500 mt-2">
@@ -150,32 +150,32 @@ export default function AdminDashboard() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-6 mb-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-5 mb-8">
           {cards.map((card, index) => (
             <div
               key={index}
-              className="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition"
+              className="bg-white rounded-2xl shadow-lg p-4 md:p-6 hover:shadow-xl transition"
             >
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-gray-500 text-sm">{card.title}</p>
-                  <h2 className={`text-3xl font-bold mt-2 ${card.color}`}>
+                  <h2 className={`text-2xl md:text-3xl font-bold mt-2 ${card.color}`}>
                     {card.value}
                   </h2>
                 </div>
 
-                <div className="text-4xl">{card.icon}</div>
+                <div className="text-3xl md:text-4xl">{card.icon}</div>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 mb-10">
-          <div className="bg-white rounded-2xl shadow-lg p-6">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-5 md:gap-8 mb-8">
+          <div className="bg-white rounded-2xl shadow-lg p-4 md:p-6">
             <h2 className="text-2xl font-bold mb-5">📊 Revenue Chart</h2>
 
             {revenueChartData.length > 0 ? (
-              <div className="w-full h-80">
+              <div className="w-full h-64 md:h-80">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={revenueChartData}>
                     <CartesianGrid strokeDasharray="3 3" />
@@ -195,11 +195,11 @@ export default function AdminDashboard() {
             )}
           </div>
 
-          <div className="bg-white rounded-2xl shadow-lg p-6">
+          <div className="bg-white rounded-2xl shadow-lg p-4 md:p-6">
             <h2 className="text-2xl font-bold mb-5">🥧 Order Status Chart</h2>
 
             {orderStatusData.length > 0 ? (
-              <div className="w-full h-80">
+              <div className="w-full h-64 md:h-80">
                 <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
                     <Pie
@@ -230,7 +230,7 @@ export default function AdminDashboard() {
         </div>
 
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
-          <div className="bg-white rounded-2xl shadow-lg p-6">
+          <div className="bg-white rounded-2xl shadow-lg p-4 md:p-6">
             <h2 className="text-2xl font-bold mb-5">⭐ Recent Orders</h2>
 
             {analytics?.recentOrders?.length > 0 ? (
@@ -238,7 +238,7 @@ export default function AdminDashboard() {
                 {analytics.recentOrders.map((order) => (
                   <div
                     key={order._id}
-                    className="border rounded-xl p-4 flex justify-between items-center"
+                    className="border rounded-xl p-4 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3"
                   >
                     <div>
                       <p className="font-semibold">
@@ -268,7 +268,7 @@ export default function AdminDashboard() {
             )}
           </div>
 
-          <div className="bg-white rounded-2xl shadow-lg p-6">
+          <div className="bg-white rounded-2xl shadow-lg p-4 md:p-6">
             <h2 className="text-2xl font-bold mb-5">🔥 Top Selling Products</h2>
 
             {analytics?.topSellingProducts?.length > 0 ? (
@@ -276,12 +276,12 @@ export default function AdminDashboard() {
                 {analytics.topSellingProducts.map((product) => (
                   <div
                     key={product._id}
-                    className="border rounded-xl p-4 flex items-center gap-4"
+                    className="border rounded-xl p-4 flex flex-col sm:flex-row sm:items-center gap-4"
                   >
                     <img
                       src={getImageUrl(product.image)}
                       alt={product.name}
-                      className="w-16 h-16 rounded-xl object-cover bg-gray-100"
+                      className="w-14 h-14 md:w-16 md:h-16 rounded-xl object-cover bg-gray-100"
                     />
 
                     <div className="flex-1">

@@ -31,7 +31,7 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur shadow-sm">
-      <div className="container-app flex items-center gap-4 py-3">
+        <div className="container-app flex items-center gap-2 md:gap-4 py-2 md:py-3">
         <button
           className="lg:hidden p-2 -ml-2 text-forest-600"
           onClick={() => setOpen((o) => !o)}
@@ -41,7 +41,7 @@ export default function Navbar() {
         </button>
 
         <Link to="/" className="flex items-center gap-2 shrink-0">
-          <div className="w-10 h-10 rounded-2xl bg-forest-500 flex items-center justify-center font-display font-bold text-white text-lg rotate-3">
+         <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl md:rounded-2xl bg-forest-500 flex items-center justify-center font-display font-bold text-white text-base md:text-lg rotate-3">
             AZ
           </div>
 
@@ -59,7 +59,7 @@ export default function Navbar() {
           <SearchBar onSearchDone={() => setOpen(false)} />
         </div>
 
-        <div className="flex items-center gap-3 ml-auto">
+        <div className="flex items-center gap-1 sm:gap-2 md:gap-3 ml-auto">
           <Link
             to="/offers"
             className="hidden sm:flex items-center gap-1 text-sm font-semibold text-chili-500"
@@ -121,7 +121,7 @@ export default function Navbar() {
           ) : (
             <Link
               to="/login"
-              className="btn-primary !py-2 !px-4 flex items-center gap-2 text-sm"
+              className="btn-primary !py-2 !px-3 md:!px-4 flex items-center gap-1 md:gap-2 text-xs md:text-sm"
             >
               <User size={16} /> Login
             </Link>
@@ -136,7 +136,7 @@ export default function Navbar() {
       <nav
         className={`${
           open ? 'block' : 'hidden'
-        } lg:block border-t border-forest-50 bg-mint/60`}
+        } lg:block border-t border-forest-50 bg-white lg:bg-mint/60 max-h-[80vh] overflow-y-auto`}
       >
         <div className="container-app flex flex-col lg:flex-row lg:items-center gap-1 lg:gap-6 py-2 lg:py-2.5 overflow-x-auto no-scrollbar">
           <NavLink to="/" className={linkClass} onClick={() => setOpen(false)}>

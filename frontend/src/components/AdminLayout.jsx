@@ -32,9 +32,9 @@ export default function AdminLayout({ children }) {
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div className="flex min-h-screen bg-gray-100 overflow-x-hidden">
       {/* Desktop Sidebar */}
-      <aside className="fixed left-0 top-0 hidden h-screen w-64 flex-col bg-green-700 text-white md:flex">
+      <aside className="fixed left-0 top-0 hidden h-screen w-64 flex-col bg-green-700 text-white shadow-xl lg:flex">
         <div className="border-b border-green-600 p-6">
           <h1 className="text-2xl font-bold">A to Z</h1>
           <p className="text-sm text-green-100">Admin Panel</p>
@@ -70,11 +70,11 @@ export default function AdminLayout({ children }) {
       </aside>
 
       {/* Main Content */}
-      <main className="min-w-0 flex-1 md:ml-64">
+      <main className="min-w-0 flex-1 lg:ml-64">
         {/* Header */}
-        <header className="sticky top-0 z-20 flex items-center justify-between bg-white px-4 py-4 shadow-sm md:px-6">
+        <header className="sticky top-0 z-20 flex items-center justify-between bg-white px-3 py-3 shadow-sm sm:px-4 md:px-6 md:py-4">
           <div>
-            <h2 className="text-xl font-bold text-gray-800">
+            <h2 className="text-lg font-bold text-gray-800 md:text-xl">
               Admin Dashboard
             </h2>
 
@@ -89,20 +89,20 @@ export default function AdminLayout({ children }) {
               <p className="text-xs text-gray-500">Store Manager</p>
             </div>
 
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-600 font-bold text-white">
+            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-green-600 font-bold text-white md:h-10 md:w-10">
               A
             </div>
           </div>
         </header>
 
         {/* Mobile Menu */}
-        <div className="overflow-x-auto border-b bg-white p-3 md:hidden">
+        <div className="overflow-x-auto border-b bg-white p-2 no-scrollbar lg:hidden">
           <div className="flex min-w-max gap-2">
             {menuItems.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
-                className={`rounded-lg px-3 py-2 text-sm font-medium ${
+                className={`whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium ${
                   isActiveRoute(item.path)
                     ? "bg-green-600 text-white"
                     : "bg-gray-100 text-gray-700"
@@ -114,7 +114,9 @@ export default function AdminLayout({ children }) {
           </div>
         </div>
 
-        <section className="p-4 md:p-6">{children}</section>
+        <section className="p-3 sm:p-4 md:p-6">
+          {children}
+        </section>
       </main>
     </div>
   );

@@ -282,7 +282,7 @@ if (!buyNowProduct) {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 gap-5 p-6 md:grid-cols-3 md:p-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 p-4 md:p-8">
               <div className="rounded-2xl border border-forest-100 bg-mint/40 p-5">
                 <PackageCheck
                   className="mb-3 text-forest-500"
@@ -549,16 +549,16 @@ if (!buyNowProduct) {
   }
 
   return (
-    <div className="container-app py-8">
-      <h1 className="mb-6 font-display text-3xl font-bold text-ink">
+    <div className="container-app py-4 md:py-8 px-2 sm:px-4">
+      <h1 className="mb-5 font-display text-2xl md:text-3xl font-bold text-ink">
         {buyNowProduct
           ? "Buy Now Checkout"
           : "Checkout"}
       </h1>
 
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-5 lg:gap-8 lg:grid-cols-3">
         <div className="space-y-6 lg:col-span-2">
-          <div className="card p-6">
+          <div className="card p-4 md:p-6">
             <h2 className="mb-4 flex items-center gap-2 font-display text-lg font-bold text-ink">
               <User
                 size={20}
@@ -607,7 +607,7 @@ if (!buyNowProduct) {
             </div>
           </div>
 
-          <div className="card p-6">
+          <div className="card p-4 md:p-6">
             <h2 className="mb-3 flex items-center gap-2 font-display text-lg font-bold text-ink">
               <MapPin
                 size={20}
@@ -627,7 +627,7 @@ if (!buyNowProduct) {
             />
           </div>
 
-          <div className="card p-6">
+          <div className="card p-4 md:p-6">
             <h2 className="mb-4 flex items-center gap-2 font-display text-lg font-bold text-ink">
               <Wallet
                 size={20}
@@ -638,7 +638,7 @@ if (!buyNowProduct) {
 
             <div className="space-y-3">
               <label
-                className={`flex cursor-pointer items-center gap-3 rounded-xl border-2 px-4 py-4 ${
+                className={`flex items-start md:items-center cursor-pointer gap-3 rounded-xl border-2 px-3 md:px-4 py-4 ${
                   paymentMethod === "Cash on Delivery"
                     ? "border-forest-500 bg-forest-50"
                     : "border-forest-100"
@@ -674,7 +674,7 @@ if (!buyNowProduct) {
               </label>
 
               <label
-                className={`flex cursor-pointer items-center gap-3 rounded-xl border-2 px-4 py-4 ${
+                className={`flex items-start md:items-center cursor-pointer gap-3 rounded-xl border-2 px-3 md:px-4 py-4 ${
                   paymentMethod === "Demo UPI"
                     ? "border-forest-500 bg-forest-50"
                     : "border-forest-100"
@@ -708,7 +708,7 @@ if (!buyNowProduct) {
               </label>
 
               <label
-                className={`flex cursor-pointer items-center gap-3 rounded-xl border-2 px-4 py-4 ${
+                className={`flex items-start md:items-center cursor-pointer gap-3 rounded-xl border-2 px-3 md:px-4 py-4  ${
                   paymentMethod === "Demo Card"
                     ? "border-forest-500 bg-forest-50"
                     : "border-forest-100"
@@ -785,7 +785,7 @@ if (!buyNowProduct) {
             )}
           </div>
 
-          <div className="card p-6">
+          <div className="card p-4 md:p-6">
             <h2 className="mb-3 font-display text-lg font-bold text-ink">
               Items ({totalQuantity})
             </h2>
@@ -818,7 +818,7 @@ if (!buyNowProduct) {
           </div>
         </div>
 
-        <div className="card sticky top-24 h-fit p-6">
+        <div className="card lg:sticky lg:top-24 h-fit p-4 md:p-6">
           {error && (
             <p className="mb-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
               {error}
@@ -835,7 +835,7 @@ if (!buyNowProduct) {
             </h2>
 
             {!appliedCoupon ? (
-              <div className="flex gap-2">
+              <div className="flex flex-col sm:flex-row gap-2">
                 <input
                   type="text"
                   value={coupon}
@@ -851,7 +851,7 @@ if (!buyNowProduct) {
                   type="button"
                   onClick={applyCoupon}
                   disabled={applyingCoupon}
-                  className="btn-outline px-4 disabled:cursor-not-allowed disabled:opacity-60"
+                  className="btn-outline w-full sm:w-auto px-4 disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {applyingCoupon
                     ? "Checking..."
@@ -937,7 +937,7 @@ if (!buyNowProduct) {
             type="button"
             onClick={handlePlaceOrder}
             disabled={placing}
-            className="btn-primary mt-6 w-full disabled:cursor-not-allowed disabled:opacity-60"
+            className="btn-primary mt-6 w-full py-3 text-sm md:text-base disabled:cursor-not-allowed disabled:opacity-60"
           >
             {placing
               ? "Processing..."

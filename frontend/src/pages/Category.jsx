@@ -110,8 +110,11 @@ export default function Category() {
   }, [products, sort, maxPrice, minRating, urlSearch]);
 
   return (
-    <div className="container-app py-8">
-      <form onSubmit={handleSearch} className="mb-6 flex gap-2">
+    <div className="container-app py-4 md:py-8 px-2 sm:px-4">
+      <form
+  onSubmit={handleSearch}
+  className="mb-5 flex flex-col sm:flex-row gap-3"
+>
         <div className="flex items-center gap-2 flex-1 bg-white border border-forest-200 rounded-full px-4 py-2.5 shadow-sm">
           <Search size={18} className="text-forest-500" />
 
@@ -123,12 +126,12 @@ export default function Category() {
           />
         </div>
 
-        <button className="bg-forest-500 text-white px-5 rounded-full font-semibold hover:bg-forest-600 transition">
+        <button className="bg-forest-500 text-white px-5 py-3 sm:py-0 rounded-full font-semibold hover:bg-forest-600 transition w-full sm:w-auto">
           Search
         </button>
       </form>
 
-      <div className="flex flex-wrap gap-2 mb-6">
+      <div className="flex gap-2 mb-5 overflow-x-auto no-scrollbar pb-2">
         {CATEGORIES.map((c) => (
           <Link
             key={c.key}
@@ -146,7 +149,7 @@ export default function Category() {
 
       <div className="flex items-center justify-between mb-6 flex-wrap gap-4">
         <div>
-          <h1 className="font-display text-3xl font-bold text-ink">
+          <h1 className="font-display text-2xl md:text-3xl font-bold text-ink">
             {urlSearch
               ? `Search Results`
               : categoryInfo
@@ -165,7 +168,7 @@ export default function Category() {
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-3 bg-white rounded-2xl p-3 shadow-sm border border-forest-50">
+        <div className="w-full lg:w-auto flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-3 bg-white rounded-2xl p-3 shadow-sm border border-forest-50">
           <label className="text-xs font-semibold text-ink/70">
             Max ₹{maxPrice}
             <input
@@ -174,14 +177,14 @@ export default function Category() {
               max="1000"
               value={maxPrice}
               onChange={(e) => setMaxPrice(Number(e.target.value))}
-              className="block w-36 accent-forest-500"
+              className="block w-full sm:w-36 accent-forest-500"
             />
           </label>
 
           <select
             value={minRating}
             onChange={(e) => setMinRating(Number(e.target.value))}
-            className="rounded-full border border-forest-200 text-sm px-4 py-2 bg-white focus:outline-none"
+            className="rounded-full border border-forest-200 text-sm px-4 py-2 bg-white focus:outline-none w-full sm:w-auto"
           >
             <option value={0}>All Ratings</option>
             <option value={4}>4★ & above</option>
@@ -215,7 +218,7 @@ export default function Category() {
       </div>
 
       {loading ? (
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
           {Array.from({ length: 10 }).map((_, i) => (
             <div
               key={i}
@@ -224,7 +227,7 @@ export default function Category() {
           ))}
         </div>
       ) : filteredProducts.length === 0 ? (
-        <div className="text-center py-24 bg-white rounded-3xl shadow-sm border border-forest-50">
+        <div className="text-center py-12 md:py-24 px-4 bg-white rounded-3xl shadow-sm border border-forest-50">
           <p className="text-5xl mb-4">🔍</p>
 
           <h2 className="text-xl font-bold text-ink mb-2">
@@ -240,7 +243,7 @@ export default function Category() {
           </button>
         </div>
       ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
           {filteredProducts.map((p) => (
             <ProductCard key={p._id} product={p} />
           ))}

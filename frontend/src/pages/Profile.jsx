@@ -170,11 +170,11 @@ export default function Profile() {
   }
 
   return (
-    <div className="container-app py-8">
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="card p-6 h-fit">
+    <div className="container-app py-4 md:py-8 px-2 sm:px-4">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 lg:gap-8">
+        <div className="card p-4 md:p-6 h-fit">
           <div className="flex flex-col items-center text-center">
-            <span className="w-20 h-20 rounded-full bg-forest-500 text-white flex items-center justify-center text-3xl font-bold font-display">
+            <span className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-forest-500 text-white flex items-center justify-center text-2xl md:text-3xl font-bold font-display">
               {user.name?.[0]?.toUpperCase() || "U"}
             </span>
 
@@ -268,7 +268,7 @@ export default function Profile() {
             )}
           </div>
 
-          <div className="flex gap-2 mt-6">
+          <div className="flex flex-col sm:flex-row gap-2 mt-6">
             {editing ? (
               <>
                 <button
@@ -322,8 +322,8 @@ export default function Profile() {
         </div>
 
         <div className="lg:col-span-2">
-          <div className="flex items-center justify-between gap-3 mb-4">
-            <h2 className="font-display text-2xl font-bold text-ink flex items-center gap-2">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
+            <h2 className="font-display text-xl md:text-2xl font-bold text-ink flex items-center gap-2">
               <Package className="text-forest-500" />
               My Orders & Tracking
             </h2>
@@ -390,8 +390,8 @@ function OrderTrackingCard({ order }) {
   ).toLowerCase();
 
   return (
-    <div className="card p-5">
-      <div className="flex justify-between items-start flex-wrap gap-3">
+    <div className="card p-4 md:p-5">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3">
         <div>
           <p className="font-semibold text-ink">
             Order #
@@ -421,7 +421,7 @@ function OrderTrackingCard({ order }) {
           </Link>
         </div>
 
-        <div className="flex flex-col items-end gap-2">
+        <div className="flex flex-row sm:flex-col items-start sm:items-end gap-2">
           <span
             className={`text-xs font-bold px-3 py-1 rounded-full capitalize ${
               statusColor[normalizedStatus] ||
@@ -452,7 +452,7 @@ function OrderTrackingCard({ order }) {
           />
         </div>
 
-        <div className="grid grid-cols-5 gap-2 mt-4">
+        <div className="grid grid-cols-5 gap-1 md:gap-2 mt-4 overflow-x-auto">
           {trackingSteps.map((step, index) => {
             const Icon = step.icon;
             const isDone = index <= safeIndex;
@@ -462,13 +462,13 @@ function OrderTrackingCard({ order }) {
                 key={step.key}
                 className="text-center"
               >
-                <div
-                  className={`mx-auto w-10 h-10 rounded-full flex items-center justify-center ${
-                    isDone
-                      ? "bg-forest-500 text-white"
-                      : "bg-mint text-ink/40"
-                  }`}
-                >
+               <div
+  className={`mx-auto w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center ${
+    isDone
+      ? "bg-forest-500 text-white"
+      : "bg-mint text-ink/40"
+  }`}
+>
                   <Icon size={18} />
                 </div>
 
@@ -567,7 +567,7 @@ function OrderTrackingCard({ order }) {
         </div>
 
         <div className="bg-mint/60 rounded-2xl p-4 md:col-span-2">
-          <div className="flex items-center justify-between gap-3 mb-4">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
             <h3 className="font-bold text-ink">
               Payment Details
             </h3>
@@ -651,7 +651,7 @@ function OrderTrackingCard({ order }) {
 
 function InfoRow({ icon: Icon, label, value }) {
   return (
-    <div className="flex items-center gap-3 mb-3">
+    <div className="flex items-start gap-3 mb-3">
       <span className="w-9 h-9 rounded-full bg-white flex items-center justify-center text-forest-600 shrink-0">
         <Icon size={16} />
       </span>
@@ -661,7 +661,7 @@ function InfoRow({ icon: Icon, label, value }) {
           {label}
         </p>
 
-        <p className="text-sm font-semibold text-ink break-all">
+        <p className="text-sm font-semibold text-ink break-words">
           {value || "N/A"}
         </p>
       </div>

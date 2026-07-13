@@ -16,18 +16,18 @@ export default function ProductCard({ product }) {
   const reviewCount = Number(product.reviewCount) || 0;
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm hover:shadow-md transition p-4 border">
+    <div className="bg-white rounded-xl md:rounded-2xl shadow-sm hover:shadow-md transition p-2 sm:p-3 md:p-4 border w-full">
       <Link to={`/product/${product._id}`}>
-        <div className="relative bg-gray-100 rounded-xl h-40 flex items-center justify-center mb-3">
+        <div className="relative bg-gray-100 rounded-lg md:rounded-xl h-28 sm:h-36 md:h-40 flex items-center justify-center mb-2 md:mb-3">
           <button
             onClick={(e) => {
               e.preventDefault();
               handleToggleWishlist(product._id);
             }}
-            className="absolute top-2 right-2 bg-white rounded-full p-2 shadow hover:scale-110 transition"
+           className="absolute top-2 right-2 bg-white rounded-full p-1.5 md:p-2 shadow hover:scale-110 transition"
           >
             <Heart
-              size={20}
+              size={16}
               className={
                 isInWishlist(product._id)
                   ? "fill-red-500 text-red-500"
@@ -39,7 +39,7 @@ export default function ProductCard({ product }) {
           <img
             src={getImageUrl(product.image)}
             alt={product.name}
-            className="h-full w-full object-contain p-3"
+            className="h-full w-full object-contain p-2 md:p-3"
             onError={(e) => {
               e.currentTarget.src = "/placeholder.png";
             }}
@@ -51,11 +51,11 @@ export default function ProductCard({ product }) {
           <span>{product.deliveryTime || "10 min"}</span>
         </div>
 
-        <h3 className="font-semibold text-gray-900 line-clamp-2">
+        <h3 className="font-semibold text-sm md:text-base text-gray-900 line-clamp-2 min-h-[40px]">
           {product.name}
         </h3>
 
-        <p className="text-sm text-gray-500 mt-1">
+        <p className="text-xs md:text-sm text-gray-500 mt-1">
           {product.quantity && product.unit
             ? `${product.quantity} ${product.unit}`
             : product.unit || "1 pcs"}
@@ -73,10 +73,10 @@ export default function ProductCard({ product }) {
         </div>
 
         <div className="flex items-center gap-2 mt-2">
-          <span className="font-bold text-gray-900">₹{finalPrice}</span>
+          <span className="font-bold text-sm md:text-lg text-gray-900">₹{finalPrice}</span>
 
           {discountPrice > 0 && (
-            <span className="text-sm text-gray-400 line-through">
+            <span className="text-xs md:text-sm text-gray-400 line-through">
               ₹{price}
             </span>
           )}
@@ -85,7 +85,7 @@ export default function ProductCard({ product }) {
 
       <button
         onClick={() => addToCart(product)}
-        className="mt-3 w-full bg-green-600 text-white font-bold py-2 rounded-lg hover:bg-green-700 transition"
+        className="mt-3 w-full bg-green-600 text-white font-bold py-2 md:py-3 rounded-lg text-xs sm:text-sm md:text-base hover:bg-green-700 transition"
       >
         ADD TO CART
       </button>

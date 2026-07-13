@@ -156,12 +156,12 @@ export default function AdminProducts() {
   };
 
   return (
-    <div className="p-8 bg-gray-50 min-h-screen">
-      <h1 className="text-3xl font-bold mb-6">📦 Product Management</h1>
+    <div className="p-3 sm:p-4 md:p-6 bg-gray-50 min-h-screen">
+      <h1 className="text-2xl md:text-3xl font-bold mb-6">📦 Product Management</h1>
 
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-6 rounded-xl shadow mb-8 grid grid-cols-1 md:grid-cols-2 gap-4"
+        className="bg-white p-4 md:p-6 rounded-xl shadow mb-8 grid grid-cols-1 md:grid-cols-2 gap-4"
       >
         <input
           name="name"
@@ -283,16 +283,16 @@ export default function AdminProducts() {
 
       <h2 className="text-2xl font-bold mb-4">Product List</h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
         {products.map((product) => (
           <div
             key={product._id}
-            className="bg-white rounded-xl shadow p-4 border hover:shadow-lg"
+            className="bg-white rounded-xl shadow p-3 md:p-4 border hover:shadow-lg transition"
           >
             <img
               src={getImageUrl(product.image)}
               alt={product.name}
-              className="h-40 w-full object-cover rounded-lg mb-4 bg-gray-100"
+              className="h-36 md:h-40 w-full object-cover rounded-lg mb-4 bg-gray-100"
               onError={(e) => {
   e.currentTarget.src = "/placeholder.png";
 }}
@@ -329,10 +329,10 @@ export default function AdminProducts() {
 
             <p className="text-sm mt-2">{product.description}</p>
 
-            <div className="flex gap-3 mt-4">
+            <div className="flex flex-col sm:flex-row gap-3 mt-4">
               <button
                 onClick={() => handleEdit(product)}
-                className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+              className="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
               >
                 Edit
               </button>
