@@ -1,4 +1,4 @@
-const emailTransporter = require("./emailTransporter");
+const emailTransporter = require("../config/emailTransporter");
 
 const sendEmail = async ({
   to,
